@@ -75,14 +75,11 @@ def project_repository(request, object_id):
 def add_or_update_ticket(request, project_id, ticket_id=None):
     project = get_object_or_404(Project, pk=project_id)
     has_permissions_or_403(request.user, "change", project)
-
     adding = ticket_id is None
-
     if adding:
         ticket = Ticket(author=request.user, project=project)
     else:
         ticket = get_object_or_404(Ticket, pk=ticket_id)
-
     if request.method == 'POST':
         form = TicketForm(request.POST, instance=ticket, parent_project=project)
         if form.is_valid():
@@ -96,7 +93,6 @@ def add_or_update_ticket(request, project_id, ticket_id=None):
             return HttpResponseRedirect(reverse('ticket_detail_url',
                                                 kwargs={'project_id' : project.pk,
                                                         'object_id'  : ticket.pk}))
-        
         else: # adding/updating failed
             if adding:
                 fail_msg = _('Ticket creation failed. Correct errors and try again')
@@ -185,12 +181,14 @@ def ticket_detail(request,object_id,project_id):
     ticket = get_object_or_404(Ticket, pk=object_id)
     has_permissions_or_403(request.user, "view", ticket.project)
     workers = ticket.workers.all()
+    observers = ticket.observers.all()
     first_related = RelatedTickets.objects.filter(first=ticket.pk)
     second_related = RelatedTickets.objects.filter(second=ticket.pk)
     return render(request,
                   'core/ticket_detail.html',
                   {'ticket' : ticket,
                    'workers' : workers,
+                   'observers' : observers,
                    'first_related':first_related,
                    'second_related':second_related})
 

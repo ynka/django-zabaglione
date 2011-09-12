@@ -40,6 +40,13 @@
 				{% trans _('Category') %}: {{ ticket.category }}
 			</td>
 		</tr>
+		<tr>
+			<td>{% trans "Observed by" %}: 
+				{% for user in observers %}
+				{{ user }}
+				{% endfor %}
+			</td>
+		</tr>
 	</table>
 </div>
 <p>

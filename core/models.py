@@ -95,6 +95,7 @@ class Ticket(TimeStampedModel):
     workers = models.ManyToManyField(User, related_name=_("tickets"),blank=True)
     related = models.ManyToManyField("self",through="RelatedTickets",symmetrical=False,blank=True)
     category = models.ForeignKey(Category,blank=True,null=True)
+    observers = models.ManyToManyField(User, related_name=_('observed_tickets'), blank=True, null=True)
 
     class Meta:
         verbose_name = _('ticket')
