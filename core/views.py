@@ -21,12 +21,10 @@ import subprocess
 
 @login_required
 def index(request):
-    ''' Strona glowna '''
     return render(request, 'core/index.html')
 
 @login_required
 def projects(request):
-    ''' Lista projektow danego usera '''
     projects = Project.objects.for_user(request.user)
     latest_news = News.objects.order_by('-created').filter(project__in=projects)
     return render(request,
@@ -35,10 +33,9 @@ def projects(request):
 
 @login_required
 def project_detail(request,object_id):
-    ''' Szczegoly projektu '''
     project = get_object_or_404(Project, pk=object_id)
     has_permissions_or_403(request.user, "view", project)
-    tickets = Ticket.objects.filter(project=project)
+    tickets = project.ticket_set.all()
     return render(request,
                   'core/project_detail.html',
                   {'project' : project,'tickets' : tickets})
@@ -46,28 +43,23 @@ def project_detail(request,object_id):
 
 @login_required
 def project_repository(request, object_id):
-    ''' Widok repozytorium zwiazanego z projektem - komunikuje sie przez
-        subprocess z Mercurialem '''
     project = get_object_or_404(Project, pk=object_id)
     has_permissions_or_403(request.user, "view", project)
     
-    # projekt nie ma podanej sciezki do repo, ale ktos requestuje url,
-    # ktory ja serwuje - np wpisane z palca do paska przegladarki = hacker :P
     if not project.repository_path:
         raise Http404
 
     stdout, stderr = "", ""
     try:
         pipe = subprocess.Popen(
-                [settings.MERCURIAL_BIN, "log"], # polecenie "hg log"
-                cwd = project.repository_path,   # w folderze repo projektu
-                stdout = subprocess.PIPE,        # przechwycenie stdout
-                stderr=subprocess.PIPE)          # i stderr
+                [settings.MERCURIAL_BIN, "log"], # command "hg log"
+                cwd = project.repository_path,   # in project's repo dir
+                stdout = subprocess.PIPE,        # capture stdout
+                stderr=subprocess.PIPE)          # and stderr
         (stdout, stderr) = pipe.communicate()
     except OSError:
         messages.error(request, _('OS Error (bad repository path or filesystem permissions)'))
 
-    # niepuste stderr oznacza blad od Mercuriala
     if stderr:
         messages.error(request, _('Mercurial error: %s' % stderr))
 
@@ -85,10 +77,8 @@ def add_or_update_ticket(request, project_id, ticket_id=None):
     adding = ticket_id is None
 
     if adding:
-        # tworzenie ticketa
         ticket = Ticket(author=request.user, project=project)
     else:
-        # edycja ticketa
         ticket = get_object_or_404(Ticket, pk=ticket_id)
 
     if request.method == 'POST':
@@ -105,7 +95,7 @@ def add_or_update_ticket(request, project_id, ticket_id=None):
                                                 kwargs={'project_id' : project.pk,
                                                         'object_id'  : ticket.pk}))
         
-        else: # niepowodzenie dodawania/uaktualniania
+        else: # adding/updating failed
             if adding:
                 fail_msg = _('Ticket creation failed. Correct errors and try again')
             else:
@@ -114,12 +104,10 @@ def add_or_update_ticket(request, project_id, ticket_id=None):
             messages.error(request, fail_msg)
     else: # GET
         form = TicketForm(instance = ticket, parent_project=project)
-    
     return render(request, 'core/add_ticket.html', {'tform' : form, 'project' : project})
 
 @login_required
 def add_ticket(request,object_id):
-    ''' Dodawanie ticketa - wyswietlanie formularza, obsluga POSTu '''
     project = get_object_or_404(Project, pk=object_id)
     has_permissions_or_403(request.user, "change", project)
     if request.method == "POST":
@@ -139,8 +127,6 @@ def add_ticket(request,object_id):
     else:
         tform = TicketForm()
 
-    # ograniczenie zbioru mozliwych do ustawienia wersji do wersji
-    # zwiazanych z aktualnym projektem
     tform.fields['version'].queryset = project.version_set
     return render(request, 'core/add_ticket.html',{'tform' : tform, 'project' : project })
 
@@ -154,7 +140,6 @@ def update_ticket(request,object_id,project_id):
         tform = TicketForm(request.POST, instance=ticket)
         if tform.is_valid():
             ticket = tform.save(commit=False)
-            # ticket.project = project
             ticket.save()
             tform.save_m2m()
             messages.success(request,_('Ticket update successful.'))
@@ -171,8 +156,6 @@ def update_ticket(request,object_id,project_id):
 
 @login_required
 def add_related_ticket(request,project_id,object_id):
-    ''' Dodawanie ticketu zwiazanego (np. x duplikuje y, x poprzedza y
-        itp) '''
     ticket = get_object_or_404(Ticket, pk=object_id)
     has_permissions_or_403(request.user, "change", ticket.project)
     if request.method == "POST":
@@ -190,9 +173,6 @@ def add_related_ticket(request,project_id,object_id):
             messages.error(request,_('Relation creation failed.'))
     else:
         form = RelatedTicketsForm()
-
-        # do wyboru w formularzu sa tylko tickety z tego samego projektu,
-        # z wylaczeniem samego siebie
         form.fields['second'].queryset = Ticket.objects.filter(project=ticket.project).exclude(pk=ticket.pk)
     return render(request,
                   'core/add_related_ticket.html',
@@ -200,7 +180,6 @@ def add_related_ticket(request,project_id,object_id):
 
 @login_required
 def ticket_detail(request,object_id,project_id):
-    ''' Szczegoly ticketu '''
     ticket = get_object_or_404(Ticket, pk=object_id)
     has_permissions_or_403(request.user, "view", ticket.project)
     workers = ticket.workers.all()
@@ -220,7 +199,6 @@ def news(request,object_id):
     news = project.news_set.all().order_by('-created')
     return render(request, 'core/news_list.html',{'news' : news,
         'project':project})
-
 
 @login_required
 def news_detail(request,object_id,project_id):
