@@ -1,12 +1,11 @@
 Zabaglione is a work-in-progress project that supports group work.
 
-What was done:
-
-- Users can submit tickets to multiple projects (representing tasks/bugs to fix in project) and assign them a nubmer of parameters (category, status, priority, version).
-- The application implements the backend authentication mechanism (can_view / can_change / can_delete) to individual objects (eg, user A can add / edit tickets in the project A, but the project B can only view, without modification, etc.)
-- Tickets must be declared in the projects, have a customizable status, may belong to the category, are assigned to the person carrying them and they have a fixed priority (tickets with a higher priority on the list stand out ticket), and finally - relations between tickets (eg A task is a duplicate of the task B, task A must be completed before task B, etc)
+Work done:
+- Support for multiple projects
+- Tickets have a customizable status, may belong to the category, are assigned to the person working on them and have priority (tickets with a higher priority are highlighted differently)
+- The application implements the backend authentication mechanism (can_view / can_change / can_delete) to individual objects (example: user A can add / edit tickets in the project A, but have read-only access to project B)
+- Support for relations between tickets (example 1: task A duplicates task B; example 2: task A precedes task B, etc)
 - Easy management of mercurial repository for each project (currently only hg log)
-- Full-text search (Haystack) among the projects, tickets and news
-- Most appropriate strings marked for translation
+- Full-text search (Haystack) - projects, tickets and news
+- Most strings marked for translation
 - Migrations supported by South
-
