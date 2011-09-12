@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>== Zabaglione == for ponies with magical powers</title>
+		<title>{% trans '== Zabaglione == for ponies with magical powers' %}</title>
 		<link rel="stylesheet" href="/site_media/styles.css" type="text/css" />
 		<link type="text/css" rel="stylesheet" href="/site_media/css/code.css"/>
 		<link rel="stylesheet" href="/site_media/css/sphene-wiki.css" type="text/css" />
@@ -16,21 +16,21 @@
 			<div class="header">
 				<div class="title">
 					<h1><a href="/">Zabaglione</a></h1>
-					<h2>for ponies with magical powers</h2>
+					<h2>{% trans 'for ponies with magical powers' %}</h2>
 				</div>
 				<div class="nav">
 					<ul>
-						<li><a href="/">Home</a></li>
-						<li><a href="{% url project_list_url %}">Projects</a></li>
-						<li><a href="{% url search_url %}">Search</a></li>
-						<li><a href="{% url admin:index %}">Admin</a></li>
+						<li><a href="/">{% trans 'Home' %}</a></li>
+						<li><a href="{% url project_list_url %}">{% trans 'Projects' %}</a></li>
+						<li><a href="{% url search_url %}">{% trans 'Search' %}</a></li>
+						<li><a href="{% url admin:index %}">{% trans 'Admin' %}</a></li>
 						{% for page in flatpages %}
-						<li><a href="{{ page.url }}">{{page.title}}</a></li>
+						<li><a href="{{ page.url }}">{{ page.title }}</a></li>
 						{% endfor %}
 						{% if user.is_authenticated %}
-						<li><a href="{% url auth_logout %}">Logout</a></li>
+						<li><a href="{% url auth_logout %}">{% trans 'Logout' %}</a></li>
 						{% else %}
-						<li><a href="{% url auth_login %}">Login</a></li>
+						<li><a href="{% url auth_login %}">{% trans 'Login' %}</a></li>
 						{% endif %}
 
 					</ul>
