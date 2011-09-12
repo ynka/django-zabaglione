@@ -17,4 +17,5 @@ urlpatterns = patterns('',
         (r'^project/(?P<object_id>\d+)/$', project_detail,{},"project_detail_url"),
         (r'^project/(?P<object_id>\d+)/repository$',project_repository,{},"project_repository_url"),
         (r'^projects/$', projects,{},"project_list_url"),
+        (r'^search/$', search, {}, 'search_url'),
 )

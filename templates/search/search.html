@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
-
-{% load i18n %}
+{% load i18n pagination_tags %}
 
 {% block content %}
-<h2>Search</h2>
+<h2>{% trans 'Search' %}</h2>
 
 <form method="get" action=".">
 	<table>
@@ -11,31 +10,24 @@
 		<tr>
 			<td>&nbsp;</td>
 			<td>
-				<input type="submit" value="Search">
+				<input type="submit" value="{% trans 'Search' %}">
 			</td>
 		</tr>
 	</table>
-
-	{% if query %}
-	<h3>{% trans "Results" %}</h3>
-
-	{% for result in page.object_list %}
-	<p>
-	<a href="{{ result.object.get_absolute_url }}">{{ result.object }}</a>
-	</p>
-	{% empty %}
-	<p>No results found.</p>
-	{% endfor %}
-
-	{% if page.has_previous or page.has_next %}
-	<div>
-		{% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-		|
-		{% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-	</div>
-	{% endif %}
-	{% else %}
-	{# Show some example queries to run, maybe query syntax, something else? #}
-	{% endif %}
 </form>
+<p>
+{% if query %}
+	<h3>{% trans "Results" %}</h3><br/>
+	{% autopaginate results 10 %}
+	{% paginate %}
+	{% for result in results %}
+		<p>
+		<a href="{{ result.object.get_absolute_url }}">{{ result.object }}</a>
+		</p>
+		{% empty %}
+		<p>{% trans 'No results found.' %}</p>
+	{% endfor %}
+	{% paginate %}
+{% endif %}
+</p>
 {% endblock %}

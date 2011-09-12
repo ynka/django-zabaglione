@@ -18,6 +18,8 @@ from haystack.views import basic_search
 from object_permissions.helpers import has_permissions_or_403
 import os
 import subprocess
+from haystack.query import EmptySearchQuerySet
+from haystack.forms import SearchForm
 
 @login_required
 def index(request):
@@ -45,7 +47,7 @@ def project_detail(request,object_id):
 def project_repository(request, object_id):
     project = get_object_or_404(Project, pk=object_id)
     has_permissions_or_403(request.user, "view", project)
-    
+
     if not project.repository_path:
         raise Http404
 
@@ -234,3 +236,14 @@ def add_news(request,object_id):
 @login_required
 def custom_search_view(request, *args, **kwargs):
     return basic_search(request, *args, **kwargs)
+
+def search(request):
+    results = EmptySearchQuerySet()
+    query = request.GET.get('q')
+    if query:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            results = form.search()
+    else:
+       form = SearchForm()
+    return render(request, 'search/search.html', {'form':form, 'results':results, 'query':query})

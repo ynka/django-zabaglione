@@ -79,12 +79,10 @@ MIDDLEWARE_CLASSES = [
         'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
         'sphene.community.middleware.ThreadLocals',
         'sphene.community.middleware.GroupMiddleware',
-#        'debug_toolbar.middleware.DebugToolbarMiddleware',
         ]
 
 LOGIN_REDIRECT_URL = '/'
 ROOT_URLCONF = 'zabaglione.urls'
-INTERNAL_IPS = ('127.0.0.1',)
 
 TEMPLATE_DIRS = (
         os.path.join(PROJECT_DIR,'templates')
@@ -122,14 +120,13 @@ INSTALLED_APPS = (
         'south',
         'django_nose', # MUSI byc po south
         'django_extensions',
-       # 'registration',
+        # 'registration',
         'django_sorting',
         'django_filters',
         'pagination',
         'haystack',
         'attachments',
 #        'test_utils',
-#        'debug_toolbar',
 
         # own apps
         'core',
@@ -141,14 +138,3 @@ HAYSTACK_SITECONF = 'zabaglione.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'xapian'
 
 
-#DEBUG_TOOLBAR_PANELS = (
-#        'debug_toolbar.panels.version.VersionDebugPanel',
-#        'debug_toolbar.panels.timer.TimerDebugPanel',
-#        'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-#        'debug_toolbar.panels.headers.HeaderDebugPanel',
-#        'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-#        'debug_toolbar.panels.template.TemplateDebugPanel',
-#        'debug_toolbar.panels.sql.SQLDebugPanel',
-#        'debug_toolbar.panels.signals.SignalDebugPanel',
-#        'debug_toolbar.panels.logger.LoggingPanel',
-#        )
