@@ -1,0 +1,251 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-12 18:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2)\n"
+
+#: models.py:33
+msgid "Enter local, absolute Mercurial repository path"
+msgstr ""
+
+#: models.py:108
+msgid "duplicates"
+msgstr ""
+
+#: models.py:109
+msgid "is blocked by"
+msgstr ""
+
+#: models.py:110
+msgid "is related to"
+msgstr ""
+
+#: views.py:68
+msgid "OS Error (bad repository path or filesystem permissions)"
+msgstr ""
+
+#: views.py:72
+#, python-format
+msgid "Mercurial error: %s"
+msgstr ""
+
+#: views.py:99
+msgid "Ticket creation successful"
+msgstr ""
+
+#: views.py:101
+msgid "Ticket update successfull"
+msgstr ""
+
+#: views.py:110
+msgid "Ticket creation failed. Correct errors and try again"
+msgstr ""
+
+#: views.py:112
+msgid "Ticket update failed. Correct errors and try again"
+msgstr ""
+
+#: views.py:133
+msgid "Ticket creation successful."
+msgstr ""
+
+#: views.py:138
+msgid "Ticket creation failed. Correct errors below and try again."
+msgstr ""
+
+#: views.py:160
+msgid "Ticket update successful."
+msgstr ""
+
+#: views.py:165
+msgid "Ticket update failed. Corrert errors below and try again."
+msgstr ""
+
+#: views.py:185
+msgid "Relation creation successful."
+msgstr ""
+
+#: views.py:190
+msgid "Relation creation failed."
+msgstr ""
+
+#: views.py:242
+msgid "News creation successful."
+msgstr ""
+
+#: views.py:247
+msgid "News creation failed."
+msgstr ""
+
+#: templates/base.html:7
+msgid "== Zabaglione == for ponies with magical powers"
+msgstr ""
+
+#: templates/base.html:19
+msgid "for ponies with magical powers"
+msgstr ""
+
+#: templates/base.html:23
+msgid "Home"
+msgstr ""
+
+#: templates/base.html:24 templates/core/project_list.html:7
+msgid "Projects"
+msgstr ""
+
+#: templates/base.html:25
+msgid "Search"
+msgstr ""
+
+#: templates/base.html:26
+msgid "Admin"
+msgstr ""
+
+#: templates/base.html:31
+msgid "Logout"
+msgstr ""
+
+#: templates/base.html:33
+msgid "Login"
+msgstr ""
+
+#: templates/core/_project_menu.html:4 templates/flatpages/default.html:12
+msgid "Menu"
+msgstr ""
+
+#: templates/core/_project_menu.html:9 templates/core/news_list.html:8
+msgid "News"
+msgstr ""
+
+#: templates/core/_project_menu.html:13 templates/core/add_news.html:5
+msgid "Add news"
+msgstr ""
+
+#: templates/core/_project_menu.html:19
+msgid "Tickets"
+msgstr ""
+
+#: templates/core/_project_menu.html:23
+msgid "Create ticket"
+msgstr ""
+
+#: templates/core/_project_menu.html:29
+msgid "Show repo log"
+msgstr ""
+
+#: templates/core/add_news.html:14 templates/core/add_ticket.html:23
+msgid "Title"
+msgstr ""
+
+#: templates/core/add_news.html:25
+msgid "Content"
+msgstr ""
+
+#: templates/core/add_news.html:36
+msgid "Create it!"
+msgstr ""
+
+#: templates/core/add_related_ticket.html:7
+#: templates/core/ticket_detail.html:114
+msgid "Add related ticket"
+msgstr ""
+
+#: templates/core/add_ticket.html:8
+msgid "Add new ticket"
+msgstr ""
+
+#: templates/core/add_ticket.html:34 templates/core/project_detail.html:37
+#: templates/core/upload_file.html:29
+msgid "Description"
+msgstr ""
+
+#: templates/core/add_ticket.html:46 templates/core/ticket_detail.html:27
+msgid "Version"
+msgstr ""
+
+#: templates/core/add_ticket.html:52 templates/core/ticket_detail.html:19
+msgid "Status"
+msgstr ""
+
+#: templates/core/add_ticket.html:60 templates/core/ticket_detail.html:22
+msgid "Priority"
+msgstr ""
+
+#: templates/core/add_ticket.html:66 templates/core/ticket_detail.html:34
+msgid "Assigned to"
+msgstr ""
+
+#: templates/core/add_ticket.html:74 templates/core/ticket_detail.html:40
+msgid "Category"
+msgstr ""
+
+#: templates/core/comment_form.html:18
+msgid "Add comment"
+msgstr ""
+
+#: templates/core/comment_list.html:11 templates/core/news_detail.html:15
+#: templates/core/news_list.html:20
+msgid "Posted by"
+msgstr ""
+
+#: templates/core/comment_list.html:11 templates/core/news_detail.html:15
+#: templates/core/news_list.html:20 templates/core/project_list.html:35
+msgid "ago"
+msgstr ""
+
+#: templates/core/files_list.html:8
+msgid "Files"
+msgstr ""
+
+#: templates/core/project_list.html:31
+msgid "Latest news"
+msgstr ""
+
+#: templates/core/ticket_detail.html:27
+msgid "till the end"
+msgstr ""
+
+#: templates/core/ticket_detail.html:30
+msgid "Author"
+msgstr ""
+
+#: templates/core/ticket_detail.html:109
+msgid "Update ticket"
+msgstr ""
+
+#: templates/core/upload_file.html:8
+msgid "Upload new file"
+msgstr ""
+
+#: templates/core/upload_file.html:18
+msgid "Name"
+msgstr ""
+
+#: templates/registration/login.html:6
+msgid "Log in!"
+msgstr ""
+
+#: templates/registration/login.html:18
+msgid ""
+"A little bit of information about your website, what you do, what's on offer "
+"and why visitors should stick around"
+msgstr ""
+
+#: templates/search/search.html:20
+msgid "Results"
+msgstr ""
