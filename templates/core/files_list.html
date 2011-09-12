@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load sorting_tags %}
+{% load pagination_tags %}
+{% load i18n %}
+{% load project_menu %}
+
+{% block content %}
+<h3>{% trans _('Files') %}</h3>
+<p>
+
+{% include 'core/attachment_list.html' %}
+
+</p>
+
+
+{% endblock %}
+
+{% block sidebar %}
+{% project_menu project user %}
+{% endblock %}
+

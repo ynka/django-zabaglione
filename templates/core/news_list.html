@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load markup %}
+{% load i18n %}
+{% load pagination_tags %}
+{% load project_menu %}
+
+{% block content %}
+<h3>{% trans _('News') %}</h3>
+<p>
+{% autopaginate news 5 %}
+{% paginate %}
+
+<table>
+	{% for msg in news %}
+	<tr>
+		<td>
+			<br/>
+			<span style="font-size: large;"><a href="{{ msg.get_absolute_url }}">{{msg.title}}</a></span><br/>
+			<pre><div class="news_content">{{ msg.content|markdown:'codehilite' }}</div></pre><br/>
+			<div class="news_author">{% trans "Posted by" %} {{ msg.author }} {{ msg.created|timesince }} {% trans "ago" %}</div>
+			<br/>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+{% paginate %}
+
+</p>
+
+{% endblock %}
+
+{% block sidebar %}
+{% project_menu project user %}
+{% endblock %}
+

@@ -1,0 +1,166 @@
+[
+    {
+        "fields": {
+            "date_joined": "2011-03-02 14:17:02", 
+            "email": "", 
+            "first_name": "", 
+            "groups": [], 
+            "is_active": true, 
+            "is_staff": false, 
+            "is_superuser": false, 
+            "last_login": "2011-03-11 03:06:08", 
+            "last_name": "", 
+            "password": "sha1$5147a$aa7ffabf0cb631dd6482cc36309d1d3fed16710d", 
+            "user_permissions": [], 
+            "username": "user"
+        }, 
+        "model": "auth.user", 
+        "pk": 3
+    }, 
+    {
+        "fields": {
+            "date_joined": "2011-03-01 15:25:40", 
+            "email": "kozak@kozak.pl", 
+            "first_name": "", 
+            "groups": [], 
+            "is_active": true, 
+            "is_staff": false, 
+            "is_superuser": false, 
+            "last_login": "2011-07-25 14:16:42", 
+            "last_name": "", 
+            "password": "sha1$e4b1a$5c1b24772bd33bdcb45dc483f07e8ebb0fac3803", 
+            "user_permissions": [], 
+            "username": "kozak"
+        }, 
+        "model": "auth.user", 
+        "pk": 2
+    }, 
+    {
+        "fields": {
+            "date_joined": "2011-07-26 18:22:17", 
+            "email": "asdfasdfadf@asdasdsad.dsds", 
+            "first_name": "", 
+            "groups": [], 
+            "is_active": false, 
+            "is_staff": false, 
+            "is_superuser": false, 
+            "last_login": "2011-07-26 18:22:17", 
+            "last_name": "", 
+            "password": "sha1$7ecd0$f536f2f3513367a0bff4eb2ea3be7f27aa1249dd", 
+            "user_permissions": [], 
+            "username": "asdfasdfasdf"
+        }, 
+        "model": "auth.user", 
+        "pk": 4
+    }, 
+    {
+        "fields": {
+            "date_joined": "2011-02-25 13:38:33", 
+            "email": "asd@asd.asd", 
+            "first_name": "", 
+            "groups": [], 
+            "is_active": true, 
+            "is_staff": true, 
+            "is_superuser": true, 
+            "last_login": "2011-07-26 18:48:23", 
+            "last_name": "", 
+            "password": "sha1$0b994$e087e9fc3f47a165ddaae4b5bc752f0d37195b88", 
+            "user_permissions": [], 
+            "username": "gorsky"
+        }, 
+        "model": "auth.user", 
+        "pk": 1
+    }, 
+    {
+        "fields": {
+            "created": "2011-02-26 16:48:05", 
+            "description": "Cool projekt.", 
+            "modified": "2011-07-26 17:52:17", 
+            "name": "Nazwa projektu", 
+            "repository_path": ""
+        }, 
+        "model": "core.project", 
+        "pk": 1
+    }, 
+    {
+        "fields": {
+            "created": "2011-02-26 16:57:24", 
+            "description": "asdasdasd", 
+            "modified": "2011-07-26 17:52:36", 
+            "name": "Nowy spoko projekt", 
+            "repository_path": "/home/gorsky"
+        }, 
+        "model": "core.project", 
+        "pk": 2
+    }, 
+    {
+        "fields": {
+            "created": "2011-03-05 16:16:41", 
+            "description": "jw", 
+            "modified": "2011-07-26 18:31:38", 
+            "name": "Projekt-klocek", 
+            "repository_path": "/home/gorsky/projekty/zabaglione"
+        }, 
+        "model": "core.project", 
+        "pk": 3
+    }, 
+    {
+        "fields": {
+            "created": "2011-07-26 18:31:55", 
+            "description": "safasfdsaf", 
+            "modified": "2011-07-26 18:32:13", 
+            "name": "sdfasdfasfd", 
+            "repository_path": ""
+        }, 
+        "model": "core.project", 
+        "pk": 4
+    }, 
+    {
+        "fields": {
+            "can_change": true, 
+            "can_delete": false, 
+            "can_view": true, 
+            "content_type": 36, 
+            "object_id": 1, 
+            "user": 1
+        }, 
+        "model": "object_permissions.objectpermission", 
+        "pk": 1
+    }, 
+    {
+        "fields": {
+            "can_change": true, 
+            "can_delete": false, 
+            "can_view": true, 
+            "content_type": 36, 
+            "object_id": 1, 
+            "user": 2
+        }, 
+        "model": "object_permissions.objectpermission", 
+        "pk": 2
+    }, 
+    {
+        "fields": {
+            "can_change": false, 
+            "can_delete": false, 
+            "can_view": true, 
+            "content_type": 36, 
+            "object_id": 1, 
+            "user": 3
+        }, 
+        "model": "object_permissions.objectpermission", 
+        "pk": 3
+    }, 
+    {
+        "fields": {
+            "can_change": false, 
+            "can_delete": false, 
+            "can_view": true, 
+            "content_type": 36, 
+            "object_id": 3, 
+            "user": 2
+        }, 
+        "model": "object_permissions.objectpermission", 
+        "pk": 4
+    }
+]

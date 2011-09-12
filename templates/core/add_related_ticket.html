@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load project_menu %}
+
+{% block content %}
+
+<h3>{% trans _('Add related ticket') %}</h3>
+<p>
+
+
+<form method = "post" action="{% url add_related_ticket_url project_id=ticket.project.pk object_id=ticket.pk %}">
+	<table>
+		<tr>
+			<td>
+				<a href="{% url ticket_detail_url ticket.project.pk ticket.pk %}">{{ ticket.title }}</a>
+			</td>
+		</tr>
+		<tr>
+			<td> {{ form.relation.errors}}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ form.relation }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ form.second.errors }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ form.second }}
+			</td>
+		</tr>
+		<td>
+				{% csrf_token %}
+				<input type="submit" class="formbutton" value="Create it!"> </td>
+		</tr>
+
+	</table>
+
+</form>
+</p>
+
+
+{% endblock %}
+
+{% block sidebar %}
+{% project_menu ticket.project user %}
+{% endblock %}

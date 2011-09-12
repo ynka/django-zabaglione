@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load attachments_tags %}
+{% load pagination_tags %}
+{% load project_menu %}
+
+{% autopaginate log %}
+{% paginate %}
+{% block content %}
+
+{% for entry in log %}
+<legend>
+    <p>
+        {{ entry.0 }}
+        {{ entry.1 }}
+        {{ entry.2 }}
+    </p>
+</legend>
+{% endfor %}
+
+{% endblock %}
+
+{% block sidebar %}
+{% project_menu project user %}
+{% endblock %}

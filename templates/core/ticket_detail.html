@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load object_permissions %}
+
+{% load comments %}
+{% load markup %}
+{% load i18n %}
+{% load project_menu %}
+{% block content %}
+{% load attachments_tags %}
+
+{% get_attachments_for ticket %}
+
+<div id="ticket">
+	<span class="title">{{ticket.title}}</span>
+<pre>{{ticket.description|markdown:'codehilite'}}</pre><br/>
+	<table>
+		<tr>
+			<td>
+				{% trans "Status" %}: {{ticket.status}}
+			</td>
+			<td>
+				{% trans "Priority" %}: {{ticket.priority}}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{% trans "Version" %}: {{ticket.version}} ({{ticket.version.due_date|timeuntil}} {% trans "till the end" %})
+			</td>
+			<td>
+				{% trans "Author" %}: {{ticket.author}}
+			</td>
+		</tr>
+		<tr>
+			<td>{% trans "Assigned to" %}: 
+				{% for user in workers %}
+				{{ user }}
+				{% endfor %}
+			</td>
+			<td>
+				{% trans _('Category') %}: {{ ticket.category }}
+			</td>
+		</tr>
+	</table>
+</div>
+<p>
+{% if first_related %}
+<table class="related">
+	{% for relation in first_related %}
+	<tr><td>
+			{{ticket.title}} 
+		</td>
+		<td>
+			{{ relation.get_relation_display }}
+		</td>
+		<td>	<a href="{% url ticket_detail_url relation.second.project.pk relation.second.pk %}">{{relation.second}}</a> 
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+<br/>
+{% endif %}
+{% if second_related %}
+<table class="related">
+	{% for relation in second_related %}
+	<tr>
+		<td>
+			<a href="{% url ticket_detail_url relation.first.project.pk relation.first.pk %}">{{relation.first}}</a>
+
+		</td>
+		<td>	{{ relation.get_relation_display }}
+		</td>
+		<td>	{{ticket.title}}
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+<br/>
+</p>
+{% endif %}
+<p>
+
+{% if attachments %}
+{% include 'core/attachment_list.html' %}
+{% endif %}
+
+{% attachment_form ticket %}
+</p>
+<p>
+{% get_comment_list for ticket as comment_list %}
+{% include 'core/comment_list.html' %}
+
+{% url ticket_detail_url ticket.project.pk ticket.pk as next_step_url %}
+{% get_comment_form for ticket as form %}
+{% include 'core/comment_form.html' %}
+
+</p>
+
+{% endblock %}
+
+{% block sidebar %}
+
+{% project_menu ticket.project user %}
+{% has_object_permission user change ticket.project as can_change_project %}
+<br/>
+{% if can_change_project %}
+<table>
+	<tr>
+		<td>
+			<a href="{% url update_ticket_url ticket.project.pk ticket.pk %}">{% trans _('Update ticket') %}</a>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a href="{% url add_related_ticket_url ticket.project.pk ticket.pk %}">{% trans _('Add related ticket') %}</a>
+		</td>
+	</tr>
+</table>
+{% endif %}
+{% endblock %}
+

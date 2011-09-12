@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load sorting_tags %}
+{% load pagination_tags %}
+{% load i18n %}
+
+{% block content %}
+<h3>{% trans _('Projects') %}</h3>
+<p>
+
+{% autosort projects %}
+{% autopaginate projects %}
+{% paginate %}
+
+
+<table>
+	<tr><th>{% anchor name Name %}</th><th>{% anchor created Created %}</th></tr>
+	{% for project in projects %}
+	<tr>
+		<td><a href="{% url project_detail_url project.pk %}">{{ project.name }}</a></td><td>{{project.created}}</td>
+	</tr>
+	{% endfor %}
+</table>
+{% paginate %}
+
+</p>
+
+
+{% endblock %}
+
+{% block sidebar %}
+<h4>{% trans _('Latest news') %}</h4>
+	{% for news in latest_news %}
+	<div style="border-bottom: 1px solid grey; font-size: small; padding: 10px;">
+		<a href="{{news.get_absolute_url}}">{{news.title }}</a><br/>
+		{{news.created|timesince}} {% trans "ago" %} <br/>
+		in {{news.project}}
+	</div>
+	{% endfor %}
+{% endblock %}
+

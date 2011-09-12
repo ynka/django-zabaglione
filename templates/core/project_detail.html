@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load sorting_tags %}
+{% load pagination_tags %}
+{% load i18n %}
+{% load project_menu %}
+
+
+
+{% block content %}
+
+<h3>{{project.name}}</h3>
+<p>
+
+<table id="ticket_list">	
+	<tr><th>{% anchor created ID %}</th><th>{% anchor title Title %}</th><th>{% anchor priority Priority %}</th><th>{% anchor version Version %}</th><th>{% anchor category Category %}</th><th>{% anchor status Status %}</th></tr>
+	{% autosort tickets %}
+	{% autopaginate tickets 10 %}
+	{% paginate %}
+	{% for ticket in tickets %}
+	<tr class="ticket_isclosed_{{ticket.status.is_closed}}">
+
+		<td>
+			{{ticket.pk}}
+		</td>
+		<td><span class="{{ticket.priority|lower}}"><a href="{% url ticket_detail_url project.pk ticket.pk %}" >{{ ticket.title }}</a></span></td><td>{{ticket.priority}}</td><td>{{ticket.version}}</td><td>{{ticket.category}}</td><td>{{ticket.status}}</td>
+	</tr>
+	{% endfor %}
+</table>
+{% paginate %}
+
+</p>
+
+{% endblock %}
+
+{% block sidebar %}
+
+<h4>{% trans "Description" %}</h4>
+
+<div style="font-size: small; padding: 10px">
+	{{project.description }}
+</div>
+
+{% project_menu project user%}
+
+{% endblock %}
+

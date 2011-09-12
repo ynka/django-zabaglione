@@ -1,0 +1,10 @@
+Niedokończony projekt aplikacji wspomagającej pracę grupową (system ticketowy).
+
+- system wspomaga pracę grupową poprzez możliwość zgłaszania ticketów (reprezentujących pojedyncze zadania/błędy do naprawienia w projekcie) i przyporządkowania im szeregu parametrów, w tym osób zajmujących się danym zagadnieniem;
+- aplikacja wspiera wiele projektów równocześnie
+- aplikacja implementuje backend uwierzytelniający udostępniający mechanizm prezycyjnych uprawnień (can_view/can_change/can_delete) do pojedynczych obiektów (np. user A może dodawać/edytować tickety w projekcie A, ale projekt B może tylko wyświetlać, bez modyfikacji, itp)
+- tickety zgłaszane w ramach projektów, posiadają konfigurowalny status, mogą należeć do kategorii, mają przypisane osoby je wykonujące; mają ustalony priorytet (tickety o wyższym priorytecie wyróżniają się na liście ticketów); wreszcie - mogą być połączone w relacje z innymi ticketami (np. zadanie A jest duplikatem zadania B; zadanie A należy wykonać przed zadaniem B itp)
+- prosta obsługa podpiętych do poszczególnych projektów repozytoriów Mercuriala (obecnie tylko hg log)
+- wyszukiwanie pełnotekstowe (Haystack) wśród projektów, ticketów i newsów
+- większość odpowiednich stringów oznaczona do tłumaczenia
+- migracje obsługiwane przez South

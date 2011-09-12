@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load project_menu %}
+
+{% block content %}
+<h3>{% trans _('Add news') %}</h3>
+<p>
+
+<form method = "post" action="{% url add_news_url object_id=project.pk%}">
+	{{ nform.non_field_errors }}
+	<table>
+		<tr>
+			<td>
+				{{ nform.title.errors }}
+				<label for="id_title">{{ _("Title") }}:</label>
+			</td>
+		</tr>
+		<tr>
+			<td>	
+				{{ nform.title }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ nform.content.errors }}
+				<label for="id_content">{% trans _('Content') %}:</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ nform.content }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{% csrf_token %}
+				<input type="submit" class="formbutton" value="Create it!">
+			</td>
+		</tr>
+	</table>
+</form>
+</p>
+
+
+{% endblock %}
+
+{% block sidebar %}
+
+{% project_menu project user %}
+{% endblock %}

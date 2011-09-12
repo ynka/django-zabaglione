@@ -1,0 +1,35 @@
+{% load i18n %}
+{% load object_permissions %}
+
+<h4>{% trans "Menu" %}</h4>
+{% has_object_permission user change project as can_change_project %}
+<table>
+	<tr>
+		<td>
+			<a href="{% url news_url project.pk %}">{% trans _("News") %}</a>
+		</td>
+		<td>
+			{% if can_change_project %}
+				<a href="{% url add_news_url project.pk %}">{% trans _('Add news') %}</a>
+			{% endif %}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a href="{{  project.get_absolute_url }}">{% trans _("Tickets") %}</a>
+		</td>
+		<td>
+			{% if can_change_project %}
+				<a href="{% url add_ticket_url project.pk %}">{% trans _("Create ticket") %}</a>
+			{% endif %}
+		</td>
+	</tr>
+		{% if project.repository_path %}
+		<td>
+			<a href="{% url project_repository_url project.pk %}">{% trans "Show repo log" %}</a>
+		</td>
+		<td></td>
+		{% endif %}
+	</tr>
+</table>
+

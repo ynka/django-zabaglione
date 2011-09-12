@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load project_menu %}
+
+
+{% block content %}
+
+<h3>{% trans _('Add new ticket') %}</h3>
+<p>
+
+
+{% if ticket_id %}
+	{% url update_ticket_url project_id=project.pk object_id=ticket_id as add_or_update_ticket_url %}
+{% else %}
+	{% url add_ticket_url object_id=project.pk as add_ticket %}
+{% endif %}
+<form method = "post" action="{{ add_or_update_ticket_url }}">	
+	
+	<table>
+		<tr>
+			<td>
+				{{ tform.title.errors }}
+				<label for="id_title">{% trans _('Title') %}:</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ tform.title }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ tform.description.errors }}
+				<label for="id_description">{% trans _('Description') %}:</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ tform.description }}
+			</td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td>
+				<label for="id_version">{% trans _('Version') %}:</label>
+			</td>
+			<td>
+				{{ tform.version }}
+			</td>
+			<td>
+				<label for="id_status">{% trans _('Status') %}:</label>
+			</td>
+			<td>
+				{{ tform.status }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="id_priority">{% trans _('Priority') %}:</label>
+			</td>
+			<td>
+				{{ tform.priority }}
+			</td>
+			<td>
+				<label for="id_workers">{% trans _('Assigned to') %}:</label>
+			</td>
+			<td>
+				{{ tform.workers }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="id_category">{% trans _('Category') %}:</label>
+			</td>
+			<td>
+				{{ tform.category }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{% csrf_token %}
+				<input type="submit" class="formbutton" value="Create it!">
+			</td>
+		</tr>
+
+	</table>
+
+</form>
+</p>
+
+
+{% endblock %}
+
+{% block sidebar %}
+{% project_menu project user %}
+{% endblock %}
+

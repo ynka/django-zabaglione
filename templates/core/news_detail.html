@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load comments %}
+{% load markup %}
+{% load i18n %}
+{% load project_menu %}
+{% load attachments_tags %}
+
+{% get_attachments_for news %}
+
+{% block content %}
+
+<div id="news">
+	<span class="title">{{news.title}}</span>
+	<pre>{{news.content|markdown:'codehilite'}}</pre>
+	<span class="news_author">{% trans "Posted by" %} {{news.author }} {{news.created|timesince}} {% trans "ago" %}<br/></span>
+</div>
+<p>
+{% if attachments %}
+{% include 'core/attachment_list.html' %}
+{% endif %}
+
+{% attachment_form news %}
+
+</p>
+
+<p>
+{% get_comment_list for news as comment_list %}
+{% include 'core/comment_list.html' %}
+
+{% get_comment_form for news as form %}
+{% url news_detail_url news.project.pk news.pk as next_step_url %}
+{% include 'core/comment_form.html' %}
+</p>
+
+{% endblock %}
+
+{% block sidebar %}
+{% project_menu news.project user %}
+{% endblock %}

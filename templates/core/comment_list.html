@@ -1,0 +1,17 @@
+{% load comments %}
+{% load i18n %}
+
+{% for comment in comment_list %}
+<div class="comment">
+	<div class="content">
+		{{comment.comment}}
+	</div>
+	<br/>
+	<div class="author">
+		{% trans "Posted by" %} {{comment.user_name}} {{comment.submit_date|timesince }} {% trans "ago" %}.
+	</div>
+</div>
+
+
+{% endfor %}
+

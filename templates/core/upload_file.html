@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load project_menu %}
+
+
+{% block content %}
+
+<h3>{% trans _('Upload new file') %}</h3>
+<p>
+
+
+<form method = "post" enctype="multipart/form-data" action="{{path}}">
+	
+	<table>
+		<tr>
+			<td>
+				{{ form.name.errors }}
+				<label for="id_name">{% trans _('Name') %}:</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ form.name }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ form.description.errors }}
+				<label for="id_description">{% trans _('Description') %}:</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ form.description }}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ form.file }}
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				{% csrf_token %}
+				<input type="submit" class="formbutton" value="Create it!">
+			</td>
+		</tr>
+
+	</table>
+
+</form>
+</p>
+
+
+{% endblock %}
+
+{% block sidebar %}
+{% project_menu project user %}
+{% endblock %}
+

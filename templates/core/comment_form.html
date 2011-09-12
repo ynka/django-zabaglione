@@ -1,0 +1,23 @@
+{% load i18n %}
+{% load comments %}
+<table>
+	<tr>
+		<td>
+			<form action="{% comment_form_target %}" method="POST"> 
+				{{ form.comment }} 
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ form.content_type }} 
+				{{ form.object_pk }} 
+				{{ form.timestamp }} 
+				{{ form.security_hash }} 
+				<input type="hidden" name="next" value="{{ next_step_url }}" />
+
+				<input type="submit" value="{% trans _('Add comment') %}" id="id_submit" />
+			</td>
+		</tr>
+	</form> 
+</table>
+
