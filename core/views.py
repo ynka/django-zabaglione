@@ -1,6 +1,6 @@
 #*- coding: utf-8 -*-
-from core.forms import *
-from core.models import *
+from core.forms import ProjectForm, TicketForm, NewsForm, RelatedTicketsForm
+from core.models import ProjectManager, Project, Version, Status, Priority, Category, Ticket, RelatedTickets, Role, News
 from datetime import date, timedelta
 from dateutil.rrule import rrule,WEEKLY
 from django.conf import settings
