@@ -1,14 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django_extensions.db.models import TimeStampedModel
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-from django.utils.translation import ugettext_lazy as _
-import django_filters
+from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.utils.translation import ugettext_lazy as _
+from django.template.loader import get_template, render_to_string
+from django.template import Context
+from django_extensions.db.models import TimeStampedModel
+from django.conf import settings
 from object_permissions.models import ObjectPermission
-
+import django_filters
 
 class ProjectManager(models.Manager):
     def for_user(self, user):
@@ -109,16 +112,21 @@ class Ticket(TimeStampedModel):
     def get_absolute_url(self):
         return ('ticket_detail_url', (), {'project_id': self.project.pk, 'object_id': self.pk})
 
-    def send_mails(self):
-        subject = "New ticket"
-        message = 'New actions in your tickets'
-        # sender should be moved to settings
-        sender = "contact@zabaglione.com"
+    def send_mails(self, action):
+        current_site = Site.objects.get_current()
+        url =  '%s%s' % (current_site, self.get_absolute_url())
+        d = Context({'url':url, 'title':self.title, 'content':self.description})
+        subject = render_to_string('core/ticket_%s_subject.txt' % action, {'title':self.title}).replace('\n', '')
+        message = render_to_string('core/ticket_%s_message.html' % action, d)
         recipients = []
         recipients.append(self.author.email)
         recipients.extend([user.email for user in self.observers.all()])
         recipients.extend([user.email for user in self.workers.all()])
-        send_mail(subject, message, sender, recipients, fail_silently=False)
+        recipients = list(set(recipients))
+        from_email = settings.DEFAULT_FROM_EMAIL
+        msg = EmailMessage(subject, message, from_email, recipients)
+        msg.content_subtype = 'html'
+        msg.send()
 
 
 class RelatedTickets(models.Model):

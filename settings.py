@@ -137,4 +137,4 @@ AUTH_PROFILE_MODULE = 'TODO.TODO'
 HAYSTACK_SITECONF = 'zabaglione.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'xapian'
 
-
+DEFAULT_FROM_EMAIL = "contact@zabaglione.com"

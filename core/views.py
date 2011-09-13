@@ -84,11 +84,12 @@ def add_or_update_ticket(request, project_id, ticket_id=None):
         form = TicketForm(request.POST, instance=ticket, parent_project=project)
         if form.is_valid():
             ticket = form.save()
-            ticket.send_mails()
             if adding:
                 ok_msg = _('Ticket creation successful')
+                ticket.send_mails('create')
             else:
                 ok_msg = _('Ticket update successfull')
+                ticket.send_mails('update')
 
             messages.success(request, ok_msg)
             return HttpResponseRedirect(reverse('ticket_detail_url',
