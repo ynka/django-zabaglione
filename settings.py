@@ -84,7 +84,7 @@ MIDDLEWARE_CLASSES = [
         ]
 
 LOGIN_REDIRECT_URL = '/'
-ROOT_URLCONF = 'zabaglione.urls'
+ROOT_URLCONF = 'django-zabaglione.urls'
 
 TEMPLATE_DIRS = (
         os.path.join(PROJECT_DIR,'templates')
@@ -103,7 +103,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
-        'zabaglione.object_permissions.backends.ObjectPermBackend',
+        'django-zabaglione.object_permissions.backends.ObjectPermBackend',
         )
 
 INSTALLED_APPS = (
@@ -137,7 +137,7 @@ INSTALLED_APPS = (
         )
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 AUTH_PROFILE_MODULE = 'TODO.TODO'
-HAYSTACK_SITECONF = 'zabaglione.search_sites'
+HAYSTACK_SITECONF = 'django-zabaglione.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'xapian'
 
 DEFAULT_FROM_EMAIL = "contact@zabaglione.com"

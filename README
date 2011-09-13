@@ -9,3 +9,19 @@ Work done:
 - Full-text search (Haystack) - projects, tickets and news
 - Most strings marked for translation
 - Migrations supported by South
+
+Dependencies:
+flatpages
+django-comments
+markup
+pygment
+south
+django_extensions
+django_sorting
+django_filters
+django_pagination
+haystack
+attachments
+reversion
+
+xapian
