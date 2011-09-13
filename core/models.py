@@ -6,6 +6,7 @@ from django.contrib.contenttypes import generic
 from django.utils.translation import ugettext_lazy as _
 import django_filters
 from django.core.urlresolvers import reverse
+from django.core.mail import send_mail
 from object_permissions.models import ObjectPermission
 
 
@@ -107,6 +108,18 @@ class Ticket(TimeStampedModel):
     @models.permalink
     def get_absolute_url(self):
         return ('ticket_detail_url', (), {'project_id': self.project.pk, 'object_id': self.pk})
+
+    def send_mails(self):
+        subject = "New ticket"
+        message = 'New actions in your tickets'
+        # sender should be moved to settings
+        sender = "contact@zabaglione.com"
+        recipients = []
+        recipients.append(self.author.email)
+        recipients.extend([user.email for user in self.observers.all()])
+        recipients.extend([user.email for user in self.workers.all()])
+        send_mail(subject, message, sender, recipients, fail_silently=False)
+
 
 class RelatedTickets(models.Model):
     first = models.ForeignKey(Ticket,related_name=_("first_set"))

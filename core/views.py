@@ -84,6 +84,7 @@ def add_or_update_ticket(request, project_id, ticket_id=None):
         form = TicketForm(request.POST, instance=ticket, parent_project=project)
         if form.is_valid():
             ticket = form.save()
+            ticket.send_mails()
             if adding:
                 ok_msg = _('Ticket creation successful')
             else:
