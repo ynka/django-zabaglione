@@ -20,6 +20,8 @@ import os
 import subprocess
 from haystack.query import EmptySearchQuerySet
 from haystack.forms import SearchForm
+import reversion
+from reversion.helpers import generate_patch_html
 
 @login_required
 def index(request):
@@ -186,11 +188,16 @@ def ticket_detail(request,object_id,project_id):
     observers = ticket.observers.all()
     first_related = RelatedTickets.objects.filter(first=ticket.pk)
     second_related = RelatedTickets.objects.filter(second=ticket.pk)
+    version_list = reversion.get_for_object(ticket)
+    diff = []
+    for i in range(0,len(version_list)-1):
+        diff.append([version_list[i], generate_patch_html(version_list[i+1], version_list[i], "description")])
     return render(request,
                   'core/ticket_detail.html',
                   {'ticket' : ticket,
                    'workers' : workers,
                    'observers' : observers,
+                   'diff' : diff,
                    'first_related':first_related,
                    'second_related':second_related})
 

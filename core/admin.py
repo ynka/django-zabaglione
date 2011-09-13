@@ -2,8 +2,9 @@ from django.contrib import admin
 from core.models import *
 from attachments.admin import AttachmentInlines
 from object_permissions.admin import ObjectPermissionInline
+import reversion
 
-class TicketAdmin(admin.ModelAdmin):
+class TicketAdmin(reversion.VersionAdmin):
     inlines = [AttachmentInlines]
 
 class NewsAdmin(admin.ModelAdmin):

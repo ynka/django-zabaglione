@@ -1,12 +1,7 @@
 {% extends "base.html" %}
-{% load object_permissions %}
+{% load object_permissions comments markup i18n project_menu attachments_tags %}
 
-{% load comments %}
-{% load markup %}
-{% load i18n %}
-{% load project_menu %}
 {% block content %}
-{% load attachments_tags %}
 
 {% get_attachments_for ticket %}
 
@@ -101,6 +96,13 @@
 {% include 'core/comment_form.html' %}
 
 </p>
+<p>
+{% for reversion in diff %}
+{{ reversion.0.revision.user }}, {{ reversion.0.revision.date_created }}<br/>
+	{{ reversion.1|safe }}
+	<br/>
+	<br/>
+{% endfor %}
 
 {% endblock %}
 

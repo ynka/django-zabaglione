@@ -79,6 +79,8 @@ MIDDLEWARE_CLASSES = [
         'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
         'sphene.community.middleware.ThreadLocals',
         'sphene.community.middleware.GroupMiddleware',
+        'django.middleware.transaction.TransactionMiddleware',
+        'reversion.middleware.RevisionMiddleware',
         ]
 
 LOGIN_REDIRECT_URL = '/'
@@ -126,6 +128,7 @@ INSTALLED_APPS = (
         'pagination',
         'haystack',
         'attachments',
+        'reversion',
 #        'test_utils',
 
         # own apps
